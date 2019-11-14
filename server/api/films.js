@@ -11,6 +11,7 @@ const {Film, User} = require('../db/models');
 
 //should eventually be homepage of all movies in db
 router.get('/', async (req, res, next) => {
+  console.log(req.user);
   try {
     const films = await Film.findAll();
     res.json(films);
@@ -66,21 +67,23 @@ router.get('/advancedSearch', async (req, res, next) => {
     next(err);
   }
 });
-router.put('/add', async (req, res, next) => {
+router.put('/watchlist/add', async (req, res, next) => {
   try {
     const film = await Film.findByPk(req.body.filmId);
-    const user = await User.findByPk(req.body.user.id);
+    const user = await User.findByPk(req.user.id);
     await user.addFilm(film);
+    res.sendStatus(201);
   } catch (err) {
     console.error(err.message);
     next(err);
   }
 });
-router.put('/remove', async (req, res, next) => {
+router.put('/watchlist/remove', async (req, res, next) => {
   try {
     const film = await Film.findByPk(req.body.filmId);
-    const user = await User.findByPk(req.body.user.id);
+    const user = await User.findByPk(req.user.id);
     await user.removeFilm(film);
+    res.sendStatus(201);
   } catch (err) {
     console.error(err.message);
     next(err);
