@@ -7,12 +7,9 @@ const {Film, User} = require('../db/models');
 //have to parse incoming data to match parameter names. I.E, north by northwest must be north+by+northwest. Helper func?
 //if response true, send back
 //post/put methods add to own database if user wants to mark as favorite
+//update route for films that are not fully complete in database -- do advanced search
 
 //should eventually be homepage of all movies in db
-//client.get will be for known title if you want to get more information
-
-//if response is true in query, add film to own database
-
 router.get('/', async (req, res, next) => {
   try {
     const films = await Film.findAll();
@@ -32,7 +29,7 @@ router.get('/watchlist', async (req, res, next) => {
     next(err);
   }
 });
-
+//returns a list of films given a title keyword
 router.get('/search', async (req, res, next) => {
   try {
     const search = await client.search({name: req.body.title});
@@ -44,6 +41,7 @@ router.get('/search', async (req, res, next) => {
 });
 //client.get will be for known title if you want to get more information
 //req.body.title
+//if response is true in query, add film to own database
 router.get('/advancedSearch', async (req, res, next) => {
   try {
     const film = await client.get({name: req.body.title});
@@ -64,7 +62,27 @@ router.get('/advancedSearch', async (req, res, next) => {
     }
     res.json(film);
   } catch (err) {
-    console.log(err.message);
+    console.error(err.message);
+    next(err);
+  }
+});
+router.put('/add', async (req, res, next) => {
+  try {
+    const film = await Film.findByPk(req.body.filmId);
+    const user = await User.findByPk(req.body.user.id);
+    await user.addFilm(film);
+  } catch (err) {
+    console.error(err.message);
+    next(err);
+  }
+});
+router.put('/remove', async (req, res, next) => {
+  try {
+    const film = await Film.findByPk(req.body.filmId);
+    const user = await User.findByPk(req.body.user.id);
+    await user.removeFilm(film);
+  } catch (err) {
+    console.error(err.message);
     next(err);
   }
 });
