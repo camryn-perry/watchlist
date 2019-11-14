@@ -10,6 +10,9 @@ const {Film, User} = require('../db/models');
 
 //should eventually be homepage of all movies in db
 //client.get will be for known title if you want to get more information
+
+//if response is true in query, add film to own database
+
 router.get('/', async (req, res, next) => {
   try {
     const films = await Film.findAll();
@@ -40,10 +43,26 @@ router.get('/search', async (req, res, next) => {
   }
 });
 //client.get will be for known title if you want to get more information
+//req.body.title
 router.get('/advancedSearch', async (req, res, next) => {
   try {
-    const movie = await client.get({name: req.body.title});
-    res.json(movie);
+    const film = await client.get({name: req.body.title});
+    if (film.response === 'True') {
+      await Film.create({
+        title: film.title,
+        year: film.year,
+        rated: film.rated,
+        runtime: film.runtime,
+        genres: film.genres,
+        director: film.director,
+        actors: film.actors,
+        plot: film.plot,
+        type: film.type,
+        imdbid: film.imdbid,
+        poster: film.poster
+      });
+    }
+    res.json(film);
   } catch (err) {
     console.log(err.message);
     next(err);
