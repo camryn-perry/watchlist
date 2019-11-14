@@ -11,7 +11,6 @@ const {Film, User} = require('../db/models');
 
 //should eventually be homepage of all movies in db
 router.get('/', async (req, res, next) => {
-  console.log(req.user);
   try {
     const films = await Film.findAll();
     res.json(films);
