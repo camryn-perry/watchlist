@@ -2,7 +2,7 @@ const router = require('express').Router();
 const imdb = require('imdb-api');
 const {API_KEY} = require('../../secrets');
 const client = new imdb.Client({apiKey: API_KEY});
-const {Film} = require('../db/models');
+const {Film, User} = require('../db/models');
 
 //have to parse incoming data to match parameter names. I.E, north by northwest must be north+by+northwest. Helper func?
 //if response true, send back
@@ -19,12 +19,11 @@ router.get('/', async (req, res, next) => {
     next(err);
   }
 });
-
-//client.get will be for known title if you want to get more information
-router.get('/', async (req, res, next) => {
+router.get('/watchlist', async (req, res, next) => {
   try {
-    const movie = await client.get({name: 'Batman'});
-    res.json(movie);
+    const currentUser = await User.findByPk(req.user.id);
+    const watchlist = await currentUser.getFilms();
+    res.json(watchlist);
   } catch (err) {
     console.log(err.message);
     next(err);
@@ -35,6 +34,16 @@ router.get('/search', async (req, res, next) => {
   try {
     const search = await client.search({name: req.body.title});
     res.json(search.results);
+  } catch (err) {
+    console.log(err.message);
+    next(err);
+  }
+});
+//client.get will be for known title if you want to get more information
+router.get('/advancedSearch', async (req, res, next) => {
+  try {
+    const movie = await client.get({name: req.body.title});
+    res.json(movie);
   } catch (err) {
     console.log(err.message);
     next(err);

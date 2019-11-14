@@ -29,6 +29,8 @@ async function seed() {
         'https://m.media-amazon.com/images/M/MV5BMTY0NTQ1NjA0OV5BMl5BanBnXkFtZTgwMDg5NjkzMTE@._V1_SX300.jpg'
     })
   ]);
+  await users[0].setFilms(films);
+
   console.log(`seeded ${users.length} users`);
   console.log(`seeded ${films.length} films`);
   console.log(`seeded successfully`);
