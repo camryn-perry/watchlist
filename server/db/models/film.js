@@ -7,7 +7,7 @@ const Film = db.define('film', {
     allowNull: false
   },
   year: {
-    type: Sequelize.NUMBER
+    type: Sequelize.INTEGER
   },
   rated: {
     type: Sequelize.STRING

@@ -1,7 +1,7 @@
 'use strict';
 
 const db = require('../server/db');
-const {User} = require('../server/db/models');
+const {User, Film} = require('../server/db/models');
 
 async function seed() {
   await db.sync({force: true});
@@ -11,8 +11,26 @@ async function seed() {
     User.create({email: 'cody@email.com', password: '123'}),
     User.create({email: 'murphy@email.com', password: '123'})
   ]);
-
+  const films = await Promise.all([
+    Film.create({
+      title: 'North by Northwest',
+      year: 1959,
+      imdbid: 'tt0053125',
+      type: 'movie',
+      poster:
+        'https://m.media-amazon.com/images/M/MV5BZDA3NDExMTUtMDlhOC00MmQ5LWExZGUtYmI1NGVlZWI4OWNiXkEyXkFqcGdeQXVyNjc1NTYyMjg@._V1_SX300.jpg'
+    }),
+    Film.create({
+      title: 'Only Lovers Left Alive',
+      year: 2013,
+      imdbid: 'tt1714915',
+      type: 'movie',
+      poster:
+        'https://m.media-amazon.com/images/M/MV5BMTY0NTQ1NjA0OV5BMl5BanBnXkFtZTgwMDg5NjkzMTE@._V1_SX300.jpg'
+    })
+  ]);
   console.log(`seeded ${users.length} users`);
+  console.log(`seeded ${films.length} films`);
   console.log(`seeded successfully`);
 }
 

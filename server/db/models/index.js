@@ -6,7 +6,8 @@ const Film = require('./film');
  *
  *    BlogPost.belongsTo(User)
  */
-
+User.belongsToMany(Film, {through: 'UserFilms'});
+Film.belongsToMany(User, {through: 'UserFilms'});
 /**
  * We'll export all of our models here, so that any time a module needs a model,
  * we can just require it from 'db/models'
