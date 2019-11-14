@@ -2,12 +2,15 @@ const router = require('express').Router();
 const imdb = require('imdb-api');
 const {API_KEY} = require('../../secrets');
 const client = new imdb.Client({apiKey: API_KEY});
+const {Film} = require('../db');
 
 //have to parse incoming data to match parameter names. I.E, north by northwest must be north+by+northwest. Helper func?
 //if response true, send back
 //post/put methods add to own database if user wants to mark as favorite
 
 //should eventually be homepage of all movies in db
+
+//client.get will be for known title if you want to get more information
 router.get('/', async (req, res, next) => {
   try {
     const movie = await client.get({name: 'Batman'});
