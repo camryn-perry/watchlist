@@ -42,7 +42,7 @@ router.get('/search', async (req, res, next) => {
 //client.get will be for known title if you want to get more information
 //req.body.title
 //if response is true in query, add film to own database
-router.get('/advancedSearch', async (req, res, next) => {
+router.put('/advancedSearch', async (req, res, next) => {
   try {
     const film = await client.get({name: req.body.title});
     if (film.response === 'True') {
