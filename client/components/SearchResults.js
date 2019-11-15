@@ -7,7 +7,11 @@ import {connect} from 'react-redux';
 
 class DisconnectedSearchResults extends React.Component {
   componentDidMount() {
-    //load search results from state
+    return (
+      <div>
+        <h3>loading...</h3>
+      </div>
+    );
   }
   render() {
     if (!this.props.results.length) {
