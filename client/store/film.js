@@ -32,9 +32,7 @@ const searchedImdb = searchResults => ({type: SEARCH_IMDB, searchResults});
 export const loadFilms = () => async dispatch => {
   try {
     const {data} = await axios.get('/api/films');
-    console.log('Called axios get req. dispatching load films...');
     dispatch(loadedFilms(data));
-    console.log('dispatched loaded films');
   } catch (err) {
     console.error(err);
   }
