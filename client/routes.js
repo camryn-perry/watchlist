@@ -28,15 +28,15 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route path="/search" component={Search} />
-        <Route path="search/:keyword" component={SearchResults} />
+        <Route exact path="/search" component={Search} />
+        <Route exact path="/search/:keyword" component={SearchResults} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
             <Route path="/films" component={AllFilms} />
-            <Route path="/search" component={Search} />
-            <Route path="search/:keyword" component={SearchResults} />
+            <Route exact path="/search" component={Search} />
+            <Route exact path="/search/:keyword" component={SearchResults} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

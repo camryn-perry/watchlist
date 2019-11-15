@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import {urlFriendly} from '../helperFunctions';
 import {Redirect} from 'react-router-dom';
 
+//incorporate advanced search option below general search for exact titles
+
 class DisconnectedSearch extends React.Component {
   constructor() {
     super();
@@ -29,7 +31,7 @@ class DisconnectedSearch extends React.Component {
 
   render() {
     if (this.state.redirect) {
-      return <Redirect to={`/search/:${this.state.keyword}`} />;
+      return <Redirect to={`/search/${this.state.keyword}`} />;
     }
     return (
       <div>
@@ -49,7 +51,6 @@ class DisconnectedSearch extends React.Component {
     );
   }
 }
-
 const mapDispatchToProps = dispatch => {
   return {
     search: keyword => dispatch(searchImdb(keyword))

@@ -6,6 +6,9 @@ import {connect} from 'react-redux';
 //need single film component view for formatting sake
 
 class DisconnectedSearchResults extends React.Component {
+  componentDidMount() {
+    //load search results from state
+  }
   render() {
     if (!this.props.results.length) {
       return (
@@ -17,7 +20,7 @@ class DisconnectedSearchResults extends React.Component {
     return (
       <div>
         {this.props.results.map(film => (
-          <div key={film.id}>
+          <div key={film.imdbid}>
             <img src={film.poster} />
             <h3>
               {film.title} ({film.year})
