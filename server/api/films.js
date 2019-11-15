@@ -4,10 +4,14 @@ const {API_KEY} = require('../../secrets');
 const client = new imdb.Client({apiKey: API_KEY});
 const {Film, User} = require('../db/models');
 
-//have to parse incoming data to match parameter names. I.E, north by northwest must be north+by+northwest. Helper func?
+//have to parse incoming data to match parameter names. I.E, north by northwest must be north+by+northwest after user submits. Helper func?
 //if response true, send back
 //post/put methods add to own database if user wants to mark as favorite
 //update route for films that are not fully complete in database -- do advanced search
+
+//in search when you click on title it does advanced search for you?
+//option to only add when user clicks button add. this will add to database. button is listed next to all search options. however the limitation to this is
+//the bigger search doesn't list all the information in returned obj
 
 //should eventually be homepage of all movies in db
 router.get('/', async (req, res, next) => {
@@ -30,9 +34,9 @@ router.get('/watchlist/:userId', async (req, res, next) => {
   }
 });
 //returns a list of films given a title keyword
-router.get('/search', async (req, res, next) => {
+router.get('/search/:keyword', async (req, res, next) => {
   try {
-    const search = await client.search({name: req.body.title});
+    const search = await client.search({name: req.params.keyword});
     res.json(search.results);
   } catch (err) {
     console.log(err.message);
@@ -42,9 +46,9 @@ router.get('/search', async (req, res, next) => {
 //client.get will be for known title if you want to get more information
 //req.body.title
 //if response is true in query, add film to own database
-router.put('/advancedSearch', async (req, res, next) => {
+router.put('/advancedSearch/:filmTitle', async (req, res, next) => {
   try {
-    const film = await client.get({name: req.body.title});
+    const film = await client.get({name: req.params.filmTitle});
     if (film.response === 'True') {
       await Film.create({
         title: film.title,

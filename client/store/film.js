@@ -76,7 +76,7 @@ export const removeFilm = film => async dispatch => {
 };
 export const searchFilm = filmTitle => async dispatch => {
   try {
-    const {data} = await axios.put(`/api/films/advancedSearch`, {
+    const {data} = await axios.put(`/api/films/advancedSearch/${filmTitle}`, {
       title: filmTitle
     });
     if (data) {
@@ -88,7 +88,7 @@ export const searchFilm = filmTitle => async dispatch => {
 };
 export const searchImdb = keyword => async dispatch => {
   try {
-    const {data} = await axios.get(`/api/films/search`, {title: keyword});
+    const {data} = await axios.get(`/api/films/search/${keyword}`);
     if (data) {
       dispatch(searchedImdb(data));
     }
