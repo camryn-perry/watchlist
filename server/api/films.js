@@ -19,9 +19,9 @@ router.get('/', async (req, res, next) => {
     next(err);
   }
 });
-router.get('/watchlist', async (req, res, next) => {
+router.get('/watchlist/:userId', async (req, res, next) => {
   try {
-    const currentUser = await User.findByPk(req.user.id);
+    const currentUser = await User.findByPk(req.params.userId);
     const watchlist = await currentUser.getFilms();
     res.json(watchlist);
   } catch (err) {
@@ -66,10 +66,10 @@ router.get('/advancedSearch', async (req, res, next) => {
     next(err);
   }
 });
-router.put('/watchlist/add', async (req, res, next) => {
+router.put('/watchlist/add/:userId', async (req, res, next) => {
   try {
     const film = await Film.findByPk(req.body.filmId);
-    const user = await User.findByPk(req.user.id);
+    const user = await User.findByPk(req.pararms.userId);
     await user.addFilm(film);
     res.sendStatus(201);
   } catch (err) {
@@ -77,10 +77,10 @@ router.put('/watchlist/add', async (req, res, next) => {
     next(err);
   }
 });
-router.put('/watchlist/remove', async (req, res, next) => {
+router.put('/watchlist/remove/:userId', async (req, res, next) => {
   try {
     const film = await Film.findByPk(req.body.filmId);
-    const user = await User.findByPk(req.user.id);
+    const user = await User.findByPk(req.params.userId);
     await user.removeFilm(film);
     res.sendStatus(201);
   } catch (err) {
