@@ -2,23 +2,22 @@ import React from 'react';
 import {searchImdb} from '../store/film';
 import {connect} from 'react-redux';
 import {urlFriendly} from '../helperFunctions';
-import {search} from 'imdb-api';
 
-class Search extends React.Component {
+class DisconnectedSearch extends React.Component {
   constructor() {
     super();
     this.state = {
       keyword: ''
     };
-    this.handleChange.bind(this);
-    this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
-  handleChange(e) {
+  handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
     });
   }
-  handleSubmit(e) {
+  handleSubmit = e => {
     e.preventDefault();
     this.props.search(urlFriendly(this.state.keyword));
   }
@@ -30,6 +29,7 @@ class Search extends React.Component {
           <small>Search for film: </small>
         </label>
         <input
+          name="keyword"
           type="text"
           value={this.state.keyword}
           onChange={this.handleChange}
@@ -48,4 +48,6 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Search);
+const Search = connect(null, mapDispatchToProps)(DisconnectedSearch);
+
+export default Search;
