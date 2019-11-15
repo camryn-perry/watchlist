@@ -8,3 +8,4 @@ export {default as UserHome} from './user-home';
 export {Login, Signup} from './auth-form';
 export {default as AllFilms} from './AllFilms';
 export {default as Search} from './Search';
+export {default as SearchResults} from './SearchResults';

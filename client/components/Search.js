@@ -2,12 +2,14 @@ import React from 'react';
 import {searchImdb} from '../store/film';
 import {connect} from 'react-redux';
 import {urlFriendly} from '../helperFunctions';
+import {Redirect} from 'react-router-dom';
 
 class DisconnectedSearch extends React.Component {
   constructor() {
     super();
     this.state = {
-      keyword: ''
+      keyword: '',
+      redirect: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,9 +22,15 @@ class DisconnectedSearch extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     this.props.search(urlFriendly(this.state.keyword));
+    this.setState({
+      redirect: true
+    });
   }
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to={`/search/:${this.state.keyword}`} />;
+    }
     return (
       <div>
         <label htmlFor="search">
