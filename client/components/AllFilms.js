@@ -1,7 +1,7 @@
 import React from 'react';
 import {loadFilms} from '../store/film';
 import {connect} from 'react-redux';
-
+import FilmView from './FilmView';
 //all films view
 //user should see a list of all films (at this point, it shows all films in database which are the films the user has explicitly searched for)
 //view should show poster, title, and year
@@ -15,10 +15,7 @@ class DisconnectedAllFilms extends React.Component {
       <div>
         {this.props.allFilms.map(film => (
           <div key={film.id}>
-            <img src={film.poster} />
-            <h3>
-              {film.title} ({film.year})
-            </h3>
+            <FilmView film={film} />
           </div>
         ))}
       </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import FilmView from './FilmView';
 
 //user will be redirected to this page after searching.
 //will either display list of search results listed from search results in store, or will display friendly message
@@ -25,10 +26,7 @@ class DisconnectedSearchResults extends React.Component {
       <div>
         {this.props.results.map(film => (
           <div key={film.imdbid}>
-            <img src={film.poster} />
-            <h3>
-              {film.title} ({film.year})
-            </h3>
+            <FilmView film={film} />
           </div>
         ))}
       </div>
