@@ -10,3 +10,4 @@ export {default as AllFilms} from './AllFilms';
 export {default as Search} from './Search';
 export {default as SearchResults} from './SearchResults';
 export {default as AdvancedFilmView} from './AdvancedFilmView';
+export {default as Watchlist} from './Watchlist';

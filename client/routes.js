@@ -8,7 +8,9 @@ import {
   UserHome,
   AllFilms,
   Search,
-  SearchResults
+  SearchResults,
+  AdvancedFilmView,
+  Watchlist
 } from './components';
 import {me} from './store';
 
@@ -37,6 +39,12 @@ class Routes extends Component {
             <Route path="/films" component={AllFilms} />
             <Route exact path="/search" component={Search} />
             <Route exact path="/search/:keyword" component={SearchResults} />
+            <Route
+              exact
+              path="/advancedSearch/:filmTitle"
+              component={AdvancedFilmView}
+            />
+            <Route path="/watchlist" component={Watchlist} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

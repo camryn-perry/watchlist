@@ -44,9 +44,10 @@ export const loadFilms = () => async dispatch => {
 //     console.error(err);
 //   };
 // };
-export const getWatchlist = userId => async dispatch => {
+export const getWatchlist = () => async dispatch => {
   try {
-    const {data} = await axios.get(`api/films/watchlist/${userId}`);
+    const user = await axios.get('auth/me').data;
+    const {data} = await axios.get(`api/films/watchlist/${user.id}`);
     dispatch(gotWatchlist(data));
   } catch (err) {
     console.error(err);
