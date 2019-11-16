@@ -73,7 +73,7 @@ router.put('/advancedSearch/:filmTitle', async (req, res, next) => {
 router.put('/watchlist/add/:userId', async (req, res, next) => {
   try {
     const film = await Film.findByPk(req.body.filmId);
-    const user = await User.findByPk(req.pararms.userId);
+    const user = await User.findByPk(req.params.userId);
     await user.addFilm(film);
     res.sendStatus(201);
   } catch (err) {
