@@ -1,5 +1,5 @@
 import React from 'react';
-import {searchImdb} from '../store/film';
+import {searchImdb, searchFilm} from '../store/film';
 import {connect} from 'react-redux';
 import {urlFriendly} from '../helperFunctions';
 import {Redirect} from 'react-router-dom';
@@ -11,32 +11,44 @@ class DisconnectedSearch extends React.Component {
     super();
     this.state = {
       keyword: '',
-      redirect: false
+      title: '',
+      redirectKeyword: false,
+      redirectAdvanced: false
     };
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleKeywordSubmit = this.handleKeywordSubmit.bind(this);
+    this.handleAdvancedSubmit = this.handleAdvancedSubmit.bind(this);
   }
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
     });
   }
-  handleSubmit = e => {
+  handleKeywordSubmit = e => {
     e.preventDefault();
     this.props.search(urlFriendly(this.state.keyword));
     this.setState({
-      redirect: true
+      redirectKeyword: true
+    });
+  }
+  handleAdvancedSubmit = e => {
+    e.preventDefault();
+    this.props.search(urlFriendly(this.state.title));
+    this.setState({
+      redirectAdvanced: true
     });
   }
 
   render() {
-    if (this.state.redirect) {
+    if (this.state.redirectKeyword) {
       return <Redirect to={`/search/${this.state.keyword}`} />;
+    } else if (this.state.redirectAdvanced) {
+      return <Redirect to={`advancedSearch/${this.state.keyword}`} />;
     }
     return (
       <div>
         <label htmlFor="search">
-          <small>Search for film: </small>
+          <small>Search for film by keyword: </small>
         </label>
         <input
           name="keyword"
@@ -44,7 +56,20 @@ class DisconnectedSearch extends React.Component {
           value={this.state.keyword}
           onChange={this.handleChange}
         />
-        <button type="submit" onClick={this.handleSubmit}>
+        <button type="submit" onClick={this.handleKeywordSubmit}>
+          Search
+        </button>
+
+        <label htmlFor="search">
+          <small>Advanced search by title: </small>
+        </label>
+        <input
+          name="title"
+          type="text"
+          value={this.state.title}
+          onChange={this.handleChange}
+        />
+        <button type="submit" onClick={this.handleAdvancedSubmit}>
           Search
         </button>
       </div>
@@ -53,7 +78,8 @@ class DisconnectedSearch extends React.Component {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    search: keyword => dispatch(searchImdb(keyword))
+    search: keyword => dispatch(searchImdb(keyword)),
+    advancedSearch: title => dispatch(searchFilm(title))
   };
 };
 

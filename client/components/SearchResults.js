@@ -16,11 +16,7 @@ class DisconnectedSearchResults extends React.Component {
   }
   render() {
     if (!this.props.results.length) {
-      return (
-        <div>
-          <h3>no results, sorry :(</h3>
-        </div>
-      );
+      return <div />;
     }
     return (
       <div>
