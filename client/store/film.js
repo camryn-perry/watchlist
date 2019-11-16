@@ -46,31 +46,40 @@ export const loadFilms = () => async dispatch => {
 // };
 export const getWatchlist = () => async dispatch => {
   try {
-    const user = await axios.get('auth/me').data;
-    const {data} = await axios.get(`api/films/watchlist/${user.id}`);
-    dispatch(gotWatchlist(data));
+    const {data} = await axios.get('auth/me');
+    const userId = data.id;
+    if (userId) {
+      const {data} = await axios.get(`api/films/watchlist/${userId}`);
+      dispatch(gotWatchlist(data));
+    }
   } catch (err) {
     console.error(err);
   }
 };
 export const addFilm = film => async dispatch => {
   try {
-    const user = await axios.get('auth/me').data;
-    const {data} = await axios.put(`api/films/watchlist/add/${user.id}`, {
-      filmId: film
-    });
-    dispatch(addedFilm(data));
+    const {data} = await axios.get('auth/me');
+    const userId = data.id;
+    if (userId) {
+      const {data} = await axios.put(`api/films/watchlist/add/${userId}`, {
+        filmId: film
+      });
+      dispatch(addedFilm(data));
+    }
   } catch (err) {
     console.error(err);
   }
 };
 export const removeFilm = film => async dispatch => {
   try {
-    const user = await axios.get('auth/me').data;
-    const {data} = await axios.put(`api/films/watchlist/remove/${user.id}`, {
-      filmId: film.id
-    });
-    dispatch(removedFilm(data));
+    const {data} = await axios.get('auth/me');
+    const userId = data.id;
+    if (userId) {
+      const {data} = await axios.put(`api/films/watchlist/remove/${userId}`, {
+        filmId: film.id
+      });
+      dispatch(removedFilm(data));
+    }
   } catch (err) {
     console.error(err);
   }

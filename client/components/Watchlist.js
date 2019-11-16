@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {getWatchlist} from '../store/film';
-import {FilmView} from './components';
+import FilmView from './FilmView';
 
 class DisconnectedWatchlist extends React.Component {
   componentDidMount() {
