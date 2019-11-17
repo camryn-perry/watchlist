@@ -27,23 +27,34 @@ class DisconnectedAllFilms extends React.Component {
       return <Redirect to={`/${this.state.title}`} />;
     }
     return (
-      <div className="row">
-        {this.props.allFilms.map(film => (
-          <div key={film.id} className="card">
-            <div onClick={() => this.renderDetailedView(film)}>
-              <FilmView film={film} />
-            </div>
-            <div className="card-action center">
-              <button
-                type="submit"
-                className="btn-large green waves-effect waves-light"
-                onClick={() => this.props.addFilm(film)}
-              >
-                Add me
-              </button>
-            </div>
+      <div>
+        <form>
+          <div className="input-field">
+            <input id="search" type="search" required />
+            <label className="label-icon" htmlFor="search">
+              <i className="material-icons">search</i>
+            </label>
+            <i className="material-icons">close</i>
           </div>
-        ))}
+        </form>
+        <div className="row">
+          {this.props.allFilms.map(film => (
+            <div key={film.id} className="card">
+              <div onClick={() => this.renderDetailedView(film)}>
+                <FilmView film={film} />
+              </div>
+              <div className="card-action center">
+                <button
+                  type="submit"
+                  className="btn-large green waves-effect waves-light"
+                  onClick={() => this.props.addFilm(film)}
+                >
+                  Add me
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     );
   }

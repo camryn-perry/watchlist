@@ -47,30 +47,33 @@ class DisconnectedSearch extends React.Component {
     }
     return (
       <div>
-        <label htmlFor="search">
-          <small>Search for film by keyword: </small>
-        </label>
+        <label htmlFor="search">Search for film by keyword:</label>
         <input
           name="keyword"
           type="text"
           value={this.state.keyword}
           onChange={this.handleChange}
         />
-        <button type="submit" onClick={this.handleKeywordSubmit}>
+        <button
+          type="submit"
+          className="btn blue waves-effect waves-light"
+          onClick={this.handleKeywordSubmit}
+        >
           Search
         </button>
-
-        <label htmlFor="search">
-          <small>Advanced search by title: </small>
-        </label>
+        <label htmlFor="search">Advanced search by title:</label>
         <input
           name="title"
           type="text"
           value={this.state.title}
           onChange={this.handleChange}
         />
-        <button type="submit" onClick={this.handleAdvancedSubmit}>
-          Search
+        <button
+          type="submit"
+          className="btn blue waves-effect waves-light"
+          onClick={this.handleAdvancedSubmit}
+        >
+          Advanced Search
         </button>
       </div>
     );
