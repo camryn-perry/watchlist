@@ -1,13 +1,5 @@
 import React from 'react';
 
-{
-  /* <div className="center single-product">
-<div className="card">
-  <div className="card-image center">
-    <img className="single-product-image" src={props.product.image} />
-    <span className="card-title"> */
-}
-
 const FilmView = props => {
   return (
     <div className="center single-film">
