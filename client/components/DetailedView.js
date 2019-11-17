@@ -3,7 +3,6 @@ import {addFilm} from '../store/film';
 import {connect} from 'react-redux';
 class DisconnectedDetailedView extends React.Component {
   render() {
-    console.log(this.props.film);
     return (
       <div>
         <img src={this.props.film.poster} />

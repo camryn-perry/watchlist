@@ -2,7 +2,6 @@ import React from 'react';
 import {loadFilms, addFilm, getFilm} from '../store/film';
 import {connect} from 'react-redux';
 import FilmView from './FilmView';
-import DetailedView from './DetailedView';
 import {Redirect} from 'react-router-dom';
 //all films view
 //user should see a list of all films (at this point, it shows all films in database which are the films the user has explicitly searched for)
@@ -20,7 +19,6 @@ class DisconnectedAllFilms extends React.Component {
     this.props.loadFilms();
   }
   renderDetailedView(film) {
-    console.log(film.id);
     this.props.getFilm(film.id);
     this.setState({redirect: true, title: film.title});
   }
@@ -31,12 +29,10 @@ class DisconnectedAllFilms extends React.Component {
     return (
       <div className="row">
         {this.props.allFilms.map(film => (
-          <div
-            key={film.id}
-            className="card"
-            onClick={() => this.renderDetailedView(film)}
-          >
-            <FilmView film={film} />
+          <div key={film.id} className="card">
+            <div onClick={() => this.renderDetailedView(film)}>
+              <FilmView film={film} />
+            </div>
             <div className="card-action center">
               <button
                 type="submit"
