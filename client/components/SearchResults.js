@@ -33,7 +33,12 @@ class DisconnectedSearchResults extends React.Component {
       return <div />;
     }
     if (this.state.redirect) {
-      return <Redirect to={`/advancedSearch/${this.state.title}`} />;
+      return (
+        <Redirect
+          to={`/advancedSearch/${this.state.title}`}
+          props={this.state.props}
+        />
+      );
     }
     return (
       <div>

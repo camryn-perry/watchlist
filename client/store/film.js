@@ -46,10 +46,8 @@ export const loadFilms = () => async dispatch => {
 // };
 export const getWatchlist = () => async dispatch => {
   try {
-    console.log('getting watchlist...');
     const {data} = await axios.get('auth/me');
     const userId = data.id;
-    console.log('watchlist requested from user: ', userId);
     if (userId) {
       const {data} = await axios.get(`api/films/watchlist/${userId}`);
       dispatch(gotWatchlist(data));
@@ -60,15 +58,12 @@ export const getWatchlist = () => async dispatch => {
 };
 export const addFilm = film => async dispatch => {
   try {
-    console.log('adding film...');
     const {data} = await axios.get('auth/me');
     const userId = data.id;
-    console.log('CURRENT USER ID ', userId);
     if (userId) {
       const {data} = await axios.put(`api/films/watchlist/add/${userId}`, {
         filmId: film.id
       });
-      console.log('add film: sending data to reducer...');
       dispatch(addedFilm(data));
     }
   } catch (err) {

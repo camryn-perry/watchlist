@@ -3,9 +3,7 @@ import {connect} from 'react-redux';
 import {addFilm} from '../store/film';
 
 class DisconnectedAdvancedFilmView extends React.Component {
-  componentDidMount() {
-    console.log(this.state.user);
-  }
+  componentDidMount() {}
   render() {
     return (
       <div>
@@ -30,8 +28,7 @@ class DisconnectedAdvancedFilmView extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    film: state.film.currentSearch,
-    user: state.user
+    film: state.film.currentSearch
   };
 };
 const mapDispatchToProps = dispatch => {
