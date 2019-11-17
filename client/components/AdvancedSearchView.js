@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {addFilm} from '../store/film';
 
-class DisconnectedAdvancedFilmView extends React.Component {
+class DisconnectedAdvancedSearchView extends React.Component {
   componentDidMount() {}
   render() {
     return (
@@ -38,8 +38,8 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const AdvancedFilmView = connect(mapStateToProps, mapDispatchToProps)(
-  DisconnectedAdvancedFilmView
+const AdvancedSearchView = connect(mapStateToProps, mapDispatchToProps)(
+  DisconnectedAdvancedSearchView
 );
 
-export default AdvancedFilmView;
+export default AdvancedSearchView;

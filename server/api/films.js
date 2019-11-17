@@ -23,6 +23,15 @@ router.get('/', async (req, res, next) => {
     next(err);
   }
 });
+router.get('/:filmId', async (req, res, next) => {
+  try {
+    const film = await Film.filmByPk(req.params.filmId);
+    res.json(film);
+  } catch (err) {
+    console.error(err.message);
+    next(err);
+  }
+});
 router.get('/watchlist/:userId', async (req, res, next) => {
   try {
     const currentUser = await User.findByPk(req.params.userId);

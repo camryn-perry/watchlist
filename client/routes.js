@@ -9,7 +9,7 @@ import {
   AllFilms,
   Search,
   SearchResults,
-  AdvancedFilmView,
+  AdvancedSearchView,
   Watchlist
 } from './components';
 import {me} from './store';
@@ -41,7 +41,7 @@ class Routes extends Component {
             <Route exact path="/search/:keyword" component={SearchResults} />
             <Route
               path="/advancedSearch/:filmTitle"
-              component={AdvancedFilmView}
+              component={AdvancedSearchView}
             />
             <Route path="/watchlist" component={Watchlist} />
           </Switch>

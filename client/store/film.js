@@ -37,13 +37,14 @@ export const loadFilms = () => async dispatch => {
     console.error(err);
   }
 };
-// export const getFilm = (filmId) => async dispatch => {
-//   try {
-//     const {data} = await axios.get('api/film')
-//   } catch (err) {
-//     console.error(err);
-//   };
-// };
+export const getFilm = filmId => async dispatch => {
+  try {
+    const {data} = await axios.get(`api/film/${filmId}`);
+    dispatch(gotFilm(data));
+  } catch (err) {
+    console.error(err);
+  }
+};
 export const getWatchlist = () => async dispatch => {
   try {
     const {data} = await axios.get('auth/me');
