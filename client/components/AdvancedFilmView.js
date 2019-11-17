@@ -8,17 +8,18 @@ class DisconnectedAdvancedFilmView extends React.Component {
     return (
       <div>
         <img src={this.props.film.poster} />
-        <h3>
+        <h4>
           {this.props.film.title} ({this.props.film.year})
-        </h3>
+        </h4>
         <h5>{this.props.film.actors}</h5>
         <p>{this.props.film.plot}</p>
         <div>
           <button
             type="submit"
+            className="btn-large green waves-effect waves-light"
             onClick={() => this.props.addFilm(this.props.film)}
           >
-            Add to Watchlist
+            Add Me!
           </button>
         </div>
       </div>

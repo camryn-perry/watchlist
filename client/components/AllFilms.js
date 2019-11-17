@@ -12,13 +12,17 @@ class DisconnectedAllFilms extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div className="row">
         {this.props.allFilms.map(film => (
-          <div key={film.id}>
+          <div key={film.id} className="card">
             <FilmView film={film} />
-            <div>
-              <button type="submit" onClick={() => this.props.addFilm(film)}>
-                Add to Watchlist
+            <div className="card-action center">
+              <button
+                type="submit"
+                className="btn-large green waves-effect waves-light"
+                onClick={() => this.props.addFilm(film)}
+              >
+                Add me
               </button>
             </div>
           </div>

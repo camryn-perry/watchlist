@@ -9,13 +9,19 @@ class DisconnectedWatchlist extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div className="row">
         {this.props.watchlist.map(film => (
-          <div key={film.id}>
+          <div key={film.id} className="card">
             <FilmView film={film} />
-            <button type="submit" onClick={() => this.props.removeFilm(film)}>
-              Remove
-            </button>
+            <div className="card-action center">
+              <button
+                type="submit"
+                className="btn-large red waves-effect waves-light"
+                onClick={() => this.props.removeFilm(film)}
+              >
+                Remove
+              </button>
+            </div>
           </div>
         ))}
       </div>

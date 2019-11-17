@@ -41,9 +41,9 @@ class DisconnectedSearchResults extends React.Component {
       );
     }
     return (
-      <div>
+      <div className="row">
         {this.props.results.map(film => (
-          <div key={film.imdbid}>
+          <div key={film.imdbid} className="card">
             <Link
               to={`/advancedSearch${film.title}`}
               onClick={() => this.onClick(film.title)}
