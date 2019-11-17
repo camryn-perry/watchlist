@@ -1,12 +1,23 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import FilmView from './FilmView';
+import {searchFilm} from '../store/film';
+import {Link, Redirect} from 'react-router-dom';
+import {urlFriendly} from '../helperFunctions';
+import AdvancedFilmView from './AdvancedFilmView';
 
 //user will be redirected to this page after searching.
 //will either display list of search results listed from search results in store, or will display friendly message
 //need single film component view for formatting sake
 
 class DisconnectedSearchResults extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      redirect: false,
+      title: ''
+    };
+  }
   componentDidMount() {
     return (
       <div>
@@ -14,14 +25,21 @@ class DisconnectedSearchResults extends React.Component {
       </div>
     );
   }
+  onClick(filmTitle) {
+    this.props.advancedSearch(urlFriendly(filmTitle));
+    this.setState({redirect: true, title: filmTitle});
+  }
   render() {
     if (!this.props.results.length) {
       return <div />;
     }
+    if (this.state.redirect) {
+      return <Redirect to={`advancedSearch/${this.state.title}`} />;
+    }
     return (
       <div>
         {this.props.results.map(film => (
-          <div key={film.imdbid}>
+          <div key={film.imdbid} onClick={() => this.onClick(film.title)}>
             <FilmView film={film} />
           </div>
         ))}
@@ -35,7 +53,14 @@ const mapStateToProps = state => {
     results: state.film.search
   };
 };
+const mapDispatchToProps = dispatch => {
+  return {
+    advancedSearch: filmTitle => dispatch(searchFilm(filmTitle))
+  };
+};
 
-const SearchResults = connect(mapStateToProps, null)(DisconnectedSearchResults);
+const SearchResults = connect(mapStateToProps, mapDispatchToProps)(
+  DisconnectedSearchResults
+);
 
 export default SearchResults;

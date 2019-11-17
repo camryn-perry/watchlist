@@ -50,7 +50,7 @@ router.put('/advancedSearch/:filmTitle', async (req, res, next) => {
   try {
     const film = await client.get({name: req.params.filmTitle});
     if (film.response === 'True') {
-      await Film.create({
+      const newFilm = await Film.create({
         title: film.title,
         year: film.year,
         rated: film.rated,
@@ -63,8 +63,8 @@ router.put('/advancedSearch/:filmTitle', async (req, res, next) => {
         imdbid: film.imdbid,
         poster: film.poster
       });
+      res.json(newFilm);
     }
-    res.json(film);
   } catch (err) {
     console.error(err.message);
     next(err);
@@ -75,7 +75,7 @@ router.put('/watchlist/add/:userId', async (req, res, next) => {
     const film = await Film.findByPk(req.body.filmId);
     const user = await User.findByPk(req.params.userId);
     await user.addFilm(film);
-    res.sendStatus(201);
+    res.json(film);
   } catch (err) {
     console.error(err.message);
     next(err);
@@ -86,7 +86,7 @@ router.put('/watchlist/remove/:userId', async (req, res, next) => {
     const film = await Film.findByPk(req.body.filmId);
     const user = await User.findByPk(req.params.userId);
     await user.removeFilm(film);
-    res.sendStatus(201);
+    res.json(film);
   } catch (err) {
     console.error(err.message);
     next(err);

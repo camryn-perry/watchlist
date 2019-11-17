@@ -40,7 +40,6 @@ class Routes extends Component {
             <Route exact path="/search" component={Search} />
             <Route exact path="/search/:keyword" component={SearchResults} />
             <Route
-              exact
               path="/advancedSearch/:filmTitle"
               component={AdvancedFilmView}
             />

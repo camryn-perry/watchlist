@@ -2,8 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {addFilm} from '../store/film';
 
-//add and remove buttons for adding to watchlist
 class DisconnectedAdvancedFilmView extends React.Component {
+  componentDidMount() {}
   render() {
     return (
       <div>
@@ -28,7 +28,8 @@ class DisconnectedAdvancedFilmView extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    film: state.film.currentSearch
+    film: state.film.currentSearch,
+    user: state.user
   };
 };
 const mapDispatchToProps = dispatch => {
