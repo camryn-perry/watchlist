@@ -3,7 +3,9 @@ import {connect} from 'react-redux';
 import {addFilm} from '../store/film';
 
 class DisconnectedAdvancedFilmView extends React.Component {
-  componentDidMount() {}
+  componentDidMount() {
+    console.log(this.state.user);
+  }
   render() {
     return (
       <div>

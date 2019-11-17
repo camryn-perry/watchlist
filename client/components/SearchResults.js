@@ -4,7 +4,6 @@ import FilmView from './FilmView';
 import {searchFilm} from '../store/film';
 import {Link, Redirect} from 'react-router-dom';
 import {urlFriendly} from '../helperFunctions';
-import AdvancedFilmView from './AdvancedFilmView';
 
 //user will be redirected to this page after searching.
 //will either display list of search results listed from search results in store, or will display friendly message
@@ -34,13 +33,18 @@ class DisconnectedSearchResults extends React.Component {
       return <div />;
     }
     if (this.state.redirect) {
-      return <Redirect to={`advancedSearch/${this.state.title}`} />;
+      return <Redirect to={`/advancedSearch/${this.state.title}`} />;
     }
     return (
       <div>
         {this.props.results.map(film => (
-          <div key={film.imdbid} onClick={() => this.onClick(film.title)}>
-            <FilmView film={film} />
+          <div key={film.imdbid}>
+            <Link
+              to={`/advancedSearch${film.title}`}
+              onClick={() => this.onClick(film.title)}
+            >
+              <FilmView film={film} />
+            </Link>
           </div>
         ))}
       </div>

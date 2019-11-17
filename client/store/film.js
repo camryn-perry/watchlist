@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import history from '../history';
 //INITIAL STATE
 const intitialState = {
   allFilms: [],
@@ -96,6 +96,7 @@ export const searchFilm = filmTitle => async dispatch => {
       title: filmTitle
     });
     if (data) {
+      history.push(`/advancedSearch/${data.title}`);
       dispatch(searchedFilm(data));
     }
   } catch (err) {
