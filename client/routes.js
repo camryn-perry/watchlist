@@ -10,6 +10,7 @@ import {
   Search,
   SearchResults,
   AdvancedSearchView,
+  DetailedView,
   Watchlist
 } from './components';
 import {me} from './store';
@@ -36,7 +37,8 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
-            <Route path="/films" component={AllFilms} />
+            <Route exact path="/films" component={AllFilms} />
+            <Route exact path="/films/:filmTitle" component={DetailedView} />
             <Route exact path="/search" component={Search} />
             <Route exact path="/search/:keyword" component={SearchResults} />
             <Route

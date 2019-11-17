@@ -11,3 +11,4 @@ export {default as Search} from './Search';
 export {default as SearchResults} from './SearchResults';
 export {default as AdvancedSearchView} from './AdvancedSearchView';
 export {default as Watchlist} from './Watchlist';
+export {default as DetailedView} from './DetailedView';

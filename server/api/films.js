@@ -25,7 +25,7 @@ router.get('/', async (req, res, next) => {
 });
 router.get('/:filmId', async (req, res, next) => {
   try {
-    const film = await Film.filmByPk(req.params.filmId);
+    const film = await Film.findByPk(req.params.filmId);
     res.json(film);
   } catch (err) {
     console.error(err.message);

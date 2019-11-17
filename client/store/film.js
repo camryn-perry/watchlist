@@ -39,7 +39,8 @@ export const loadFilms = () => async dispatch => {
 };
 export const getFilm = filmId => async dispatch => {
   try {
-    const {data} = await axios.get(`api/film/${filmId}`);
+    const {data} = await axios.get(`api/films/${filmId}`);
+    history.push(`/films/${data.title}`);
     dispatch(gotFilm(data));
   } catch (err) {
     console.error(err);
