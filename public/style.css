@@ -19,3 +19,17 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 40px 25px 25px;
+}
+
+.single-film {
+  flex-basis: 30%;
+  min-width: 200px;
+  min-height: 400px;
+}
