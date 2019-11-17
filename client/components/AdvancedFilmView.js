@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {addFilm, removeFilm} from '../store/film';
+import {addFilm} from '../store/film';
 
 //add and remove buttons for adding to watchlist
 class DisconnectedAdvancedFilmView extends React.Component {
@@ -13,6 +13,14 @@ class DisconnectedAdvancedFilmView extends React.Component {
         </h3>
         <h5>{this.props.film.actors}</h5>
         <p>{this.props.film.plot}</p>
+        <div>
+          <button
+            type="submit"
+            onClick={() => this.props.addFilm(this.props.film)}
+          >
+            Add to Watchlist
+          </button>
+        </div>
       </div>
     );
   }
@@ -25,8 +33,7 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-    addFilm: film => dispatch(addFilm(film)),
-    removeFilm: film => dispatch(removeFilm(film))
+    addFilm: film => dispatch(addFilm(film))
   };
 };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {loadFilms} from '../store/film';
+import {loadFilms, addFilm} from '../store/film';
 import {connect} from 'react-redux';
 import FilmView from './FilmView';
 //all films view
@@ -16,6 +16,11 @@ class DisconnectedAllFilms extends React.Component {
         {this.props.allFilms.map(film => (
           <div key={film.id}>
             <FilmView film={film} />
+            <div>
+              <button type="submit" onClick={() => this.props.addFilm(film)}>
+                Add to Watchlist
+              </button>
+            </div>
           </div>
         ))}
       </div>
@@ -31,7 +36,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadFilms: () => dispatch(loadFilms())
+    loadFilms: () => dispatch(loadFilms()),
+    addFilm: film => dispatch(addFilm(film))
   };
 };
 const AllFilms = connect(mapStateToProps, mapDispatchToProps)(

@@ -24,7 +24,7 @@ const loadedFilms = allFilms => ({type: LOAD_FILMS, allFilms});
 const gotFilm = film => ({type: GET_FILM, film});
 const gotWatchlist = watchlist => ({type: GET_WATCHLIST, watchlist});
 const addedFilm = film => ({type: ADD_FILM, film});
-const removedFilm = () => ({type: REMOVE_FILM});
+const removedFilm = film => ({type: REMOVE_FILM, film});
 const searchedFilm = film => ({type: SEARCH_FILM, film});
 const searchedImdb = searchResults => ({type: SEARCH_IMDB, searchResults});
 
@@ -46,8 +46,10 @@ export const loadFilms = () => async dispatch => {
 // };
 export const getWatchlist = () => async dispatch => {
   try {
+    console.log('getting watchlist...');
     const {data} = await axios.get('auth/me');
     const userId = data.id;
+    console.log('watchlist requested from user: ', userId);
     if (userId) {
       const {data} = await axios.get(`api/films/watchlist/${userId}`);
       dispatch(gotWatchlist(data));
@@ -58,18 +60,22 @@ export const getWatchlist = () => async dispatch => {
 };
 export const addFilm = film => async dispatch => {
   try {
+    console.log('adding film...');
     const {data} = await axios.get('auth/me');
     const userId = data.id;
+    console.log('CURRENT USER ID ', userId);
     if (userId) {
       const {data} = await axios.put(`api/films/watchlist/add/${userId}`, {
-        filmId: film
+        filmId: film.id
       });
+      console.log('add film: sending data to reducer...');
       dispatch(addedFilm(data));
     }
   } catch (err) {
     console.error(err);
   }
 };
+
 export const removeFilm = film => async dispatch => {
   try {
     const {data} = await axios.get('auth/me');

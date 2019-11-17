@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {getWatchlist} from '../store/film';
+import {getWatchlist, removeFilm} from '../store/film';
 import FilmView from './FilmView';
 
 class DisconnectedWatchlist extends React.Component {
@@ -13,6 +13,9 @@ class DisconnectedWatchlist extends React.Component {
         {this.props.watchlist.map(film => (
           <div key={film.id}>
             <FilmView film={film} />
+            <button type="submit" onClick={() => this.props.removeFilm(film)}>
+              Remove
+            </button>
           </div>
         ))}
       </div>
@@ -28,7 +31,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getWatchlist: () => dispatch(getWatchlist())
+    getWatchlist: () => dispatch(getWatchlist()),
+    removeFilm: film => dispatch(removeFilm(film))
   };
 };
 
