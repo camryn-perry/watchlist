@@ -59,20 +59,27 @@ router.put('/advancedSearch/:filmTitle', async (req, res, next) => {
   try {
     const film = await client.get({name: req.params.filmTitle});
     if (film.response === 'True') {
-      const newFilm = await Film.create({
-        title: film.title,
-        year: film.year,
-        rated: film.rated,
-        runtime: film.runtime,
-        genres: film.genres,
-        director: film.director,
-        actors: film.actors,
-        plot: film.plot,
-        type: film.type,
-        imdbid: film.imdbid,
-        poster: film.poster
-      });
-      res.json(newFilm);
+      const title = film.title;
+      //check current db
+      const dbfilm = await Film.findOne({where: {title: title}});
+      if (dbfilm) {
+        res.json(dbfilm);
+      } else {
+        const newFilm = await Film.create({
+          title: film.title,
+          year: film.year,
+          rated: film.rated,
+          runtime: film.runtime,
+          genres: film.genres,
+          director: film.director,
+          actors: film.actors,
+          plot: film.plot,
+          type: film.type,
+          imdbid: film.imdbid,
+          poster: film.poster
+        });
+        res.json(newFilm);
+      }
     }
   } catch (err) {
     console.error(err.message);
