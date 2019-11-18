@@ -7,6 +7,9 @@ class DisconnectedAdvancedSearchView extends React.Component {
     this.props.advancedSearch(urlFriendly(this.props.match.params.filmTitle));
   }
   render() {
+    if (!this.props.film.title) {
+      return <div />;
+    }
     return (
       <div>
         <img src={this.props.film.poster} />

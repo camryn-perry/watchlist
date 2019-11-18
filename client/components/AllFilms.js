@@ -29,38 +29,38 @@ class DisconnectedAllFilms extends React.Component {
     //   return <Redirect to={`films/${this.state.filmId}`} />;
     // }
     return (
-      <div>
-        <form>
-          <div className="input-field">
-            <input id="search" type="search" required />
-            <label className="label-icon" htmlFor="search">
-              <i className="material-icons">search</i>
-            </label>
-            <i className="material-icons">close</i>
-          </div>
-        </form>
-        <div className="row">
-          {this.props.allFilms.map(film => (
-            <div key={film.id} className="card">
-              <Link to={`/films/${film.id}`}>
-                <div>
-                  <FilmView film={film} />
-                </div>
-              </Link>
-              <Route path={`/films/${film.id}`} component={DetailedView} />
-              <div className="card-action center">
-                <button
-                  type="submit"
-                  className="btn-large green waves-effect waves-light"
-                  onClick={() => this.props.addFilm(film)}
-                >
-                  Add me
-                </button>
+      // <div>
+      //   <form>
+      //     <div className="input-field">
+      //       <input id="search" type="search" required />
+      //       <label className="label-icon" htmlFor="search">
+      //         <i className="material-icons">search</i>
+      //       </label>
+      //       <i className="material-icons">close</i>
+      //     </div>
+      //   </form>
+      <div className="row">
+        {this.props.allFilms.map(film => (
+          <div key={film.id} className="card">
+            <Link to={`/films/${film.id}`}>
+              <div>
+                <FilmView film={film} />
               </div>
+            </Link>
+            <Route path={`/films/${film.id}`} component={DetailedView} />
+            <div className="card-action center">
+              <button
+                type="submit"
+                className="btn-large green waves-effect waves-light"
+                onClick={() => this.props.addFilm(film)}
+              >
+                Add me
+              </button>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
+      // </div>
     );
   }
 }
