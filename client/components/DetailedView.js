@@ -1,7 +1,10 @@
 import React from 'react';
-import {addFilm} from '../store/film';
+import {addFilm, getFilm} from '../store/film';
 import {connect} from 'react-redux';
 class DisconnectedDetailedView extends React.Component {
+  componentDidMount() {
+    this.props.getFilm(this.props.match.params.filmId);
+  }
   render() {
     return (
       <div>
@@ -31,7 +34,8 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-    addFilm: film => dispatch(addFilm(film))
+    addFilm: film => dispatch(addFilm(film)),
+    getFilm: filmId => dispatch(getFilm(filmId))
   };
 };
 const DetailedView = connect(mapStateToProps, mapDispatchToProps)(
