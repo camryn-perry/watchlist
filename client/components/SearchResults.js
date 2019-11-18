@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import FilmView from './FilmView';
 import {searchFilm} from '../store/film';
-import {Link, Redirect} from 'react-router-dom';
+import {Link, Redirect, Route} from 'react-router-dom';
 import {urlFriendly} from '../helperFunctions';
 
 //user will be redirected to this page after searching.
@@ -24,32 +24,30 @@ class DisconnectedSearchResults extends React.Component {
       </div>
     );
   }
-  onClick(filmTitle) {
-    this.props.advancedSearch(urlFriendly(filmTitle));
-    this.setState({redirect: true, title: filmTitle});
-  }
+  // onClick(filmTitle) {
+  //   this.props.advancedSearch(urlFriendly(filmTitle));
+  //   this.setState({redirect: true, title: filmTitle});
+  // }
   render() {
     if (!this.props.results.length) {
       return <div />;
     }
-    if (this.state.redirect) {
-      return (
-        <Redirect
-          to={`/advancedSearch/${this.state.title}`}
-          props={this.state.props}
-        />
-      );
-    }
+    // if (this.state.redirect) {
+    //   return (
+    //     <Redirect
+    //       to={`/advancedSearch/${this.state.title}`}
+    //       props={this.state.props}
+    //     />
+    //   );
+    // }
     return (
       <div className="row">
         {this.props.results.map(film => (
           <div key={film.imdbid} className="card">
-            <Link
-              to={`/advancedSearch${film.title}`}
-              onClick={() => this.onClick(film.title)}
-            >
+            <Link to={`/advancedSearch/${film.title}`}>
               <FilmView film={film} />
             </Link>
+            <Route path={`/advancedSearch/${film.title}`} />
           </div>
         ))}
       </div>
