@@ -33,7 +33,7 @@ class DisconnectedSearch extends React.Component {
   }
   handleAdvancedSubmit = e => {
     e.preventDefault();
-    this.props.advancedSearch(urlFriendly(this.state.title));
+    //this.props.advancedSearch(urlFriendly(this.state.title));
     this.setState({
       redirectAdvanced: true
     });

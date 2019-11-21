@@ -1,10 +1,15 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {addFilm} from '../store/film';
-
+import {addFilm, searchFilm} from '../store/film';
+import {urlFriendly} from '../helperFunctions';
 class DisconnectedAdvancedSearchView extends React.Component {
-  componentDidMount() {}
+  componentDidMount() {
+    this.props.advancedSearch(urlFriendly(this.props.match.params.filmTitle));
+  }
   render() {
+    if (!this.props.film.title) {
+      return <div />;
+    }
     return (
       <div>
         <img src={this.props.film.poster} />
@@ -34,7 +39,8 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-    addFilm: film => dispatch(addFilm(film))
+    addFilm: film => dispatch(addFilm(film)),
+    advancedSearch: filmTitle => dispatch(searchFilm(filmTitle))
   };
 };
 
