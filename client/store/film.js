@@ -1,7 +1,7 @@
 import axios from 'axios';
 import history from '../history';
 //INITIAL STATE
-const intitialState = {
+const initialState = {
   allFilms: [],
   currentFilm: {},
   watchlist: [],
@@ -114,7 +114,7 @@ export const searchImdb = keyword => async dispatch => {
 /**
  * REDUCER
  */
-export default function(state = intitialState, action) {
+export default function(state = initialState, action) {
   switch (action.type) {
     case LOAD_FILMS:
       return {...state, allFilms: [...action.allFilms]};
