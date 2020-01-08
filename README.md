@@ -15,3 +15,5 @@ Then
 
 to run the app in the development mode.<br />
 Open [http://localhost:8080](http://localhost:8080) to view it in the browser.
+
+Used Fullstack Academy's Boilerplate template as the framework.
