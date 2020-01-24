@@ -5,6 +5,10 @@ Having trouble keeping up with all the films you want to watch? Is not everythin
 <b>Try it!</b>
 To test on your local server, fork and clone this repository.
 
+If you have PostgreSQL installed, run createdb watchlist in your terminal.
+
+Once your database has been created,
+
 Run
 
 ### npm install
